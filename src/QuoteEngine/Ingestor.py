@@ -11,7 +11,7 @@ from typing import List
 class Ingestor(IngestorInterface):
     """Class to encapsulate ingestion methods."""
 
-    ingestors = [CSVIngestor, TXTIngestor, DOCXIngestor]
+    ingestors = [CSVIngestor, TXTIngestor, DOCXIngestor, PDFIngestor,]
 
 
     @classmethod

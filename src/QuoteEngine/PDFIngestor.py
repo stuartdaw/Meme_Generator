@@ -1,7 +1,10 @@
 from typing import List
+import subprocess
+import os
+import random
+
 from .QuoteModel import QuoteModel
 from .IngestorInterface import IngestorInterface
-import pandas as pd
 
 
 class PDFIngestor(IngestorInterface):
@@ -14,13 +17,22 @@ class PDFIngestor(IngestorInterface):
         """Overrides abstract class method for pdf files"""
 
         if not cls.can_ingest(path):
-            raise (f"Can't ingest {path}. Not a valid PDF file.")
+            raise f"Can't ingest {path}. Not a valid PDF file."
 
+        tmp = f'./tmp/{random.randint(0, 100000000)}.txt'
+        call = subprocess.call(['pdftotext','-layout', path, tmp])
+
+        file_ref = open(tmp, 'r')
         quotes = []
-        df = pd.read_csv(path, sep=" - ", header=None, names=['quote','author'], engine='python')
 
-        for index, row in df.iterrows():
-            new_quote = QuoteModel(row['quote'], row['author'])
-            quotes.append(new_quote)
+        for line in file_ref.readlines():
+            print(f'line: {line}')
+            line = line.strip('\r\n').strip()
+            if len(line) > 0:
+                parsed = line.split(' - ')
+                new_quote = QuoteModel(parsed[0], parsed[1])
+                quotes.append(new_quote)
 
+        file_ref.close()
+        os.remove(tmp)
         return quotes

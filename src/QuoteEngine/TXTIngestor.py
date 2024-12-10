@@ -14,7 +14,7 @@ class TXTIngestor(IngestorInterface):
         """Overrides abstract class method for txt files"""
 
         if not cls.can_ingest(path):
-            raise (f"Can't ingest {path}. Not a valid TXT file.")
+            raise f"Can't ingest {path}. Not a valid TXT file."
 
         quotes = []
         df = pd.read_csv(path, sep=" - ", header=None, names=['quote','author'], engine='python')

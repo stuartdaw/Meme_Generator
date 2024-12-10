@@ -1,7 +1,7 @@
 from typing import List
 from .QuoteModel import QuoteModel
 from .IngestorInterface import IngestorInterface
-import pandas as pd
+import docx
 
 
 class DOCXIngestor(IngestorInterface):
@@ -14,13 +14,15 @@ class DOCXIngestor(IngestorInterface):
         """Overrides abstract class method for docx files"""
 
         if not cls.can_ingest(path):
-            raise (f"Can't ingest {path}. Not a valid DOCX file.")
+            raise f"Can't ingest {path}. Not a valid DOCX file."
 
         quotes = []
-        df = pd.read_csv(path, sep=" - ", header=None, names=['quote','author'])
+        wd_doc = docx.Document(path)
 
-        for index, row in df.iterrows():
-            new_quote = QuoteModel(row['quote'], row['author'])
-            quotes.append(new_quote)
+        for line in wd_doc.paragraphs:
+            if line.text != "":
+                parse = line.text.split(' - ')
+                new_quote = QuoteModel(parse[0], parse[1])
+                quotes.append(new_quote)
 
         return quotes
