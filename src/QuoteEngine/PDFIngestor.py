@@ -26,7 +26,6 @@ class PDFIngestor(IngestorInterface):
         quotes = []
 
         for line in file_ref.readlines():
-            print(f'line: {line}')
             line = line.strip('\r\n').strip()
             if len(line) > 0:
                 parsed = line.split(' - ')
@@ -35,4 +34,5 @@ class PDFIngestor(IngestorInterface):
 
         file_ref.close()
         os.remove(tmp)
+
         return quotes

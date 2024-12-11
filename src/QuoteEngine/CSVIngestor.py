@@ -11,7 +11,7 @@ class CSVIngestor(IngestorInterface):
     @classmethod
     def parse(cls, path: str) -> List[QuoteModel]:
         """Overrides abstract class method for csv files"""
-        print(f'made it into CSV ingestor class')
+        # print(f'made it into CSV ingestor class')
 
         if not cls.can_ingest(path):
             raise f"Can't ingest {path}. Not a valid CSV file."

@@ -17,10 +17,19 @@ class TXTIngestor(IngestorInterface):
             raise f"Can't ingest {path}. Not a valid TXT file."
 
         quotes = []
-        df = pd.read_csv(path, sep=" - ", header=None, names=['quote','author'], engine='python')
 
-        for index, row in df.iterrows():
-            new_quote = QuoteModel(row['quote'], row['author'])
-            quotes.append(new_quote)
+        with open(path, 'r') as f:
+            lines = f.readlines()
+
+        counter = True
+        for line in lines:
+            # Always a special character added to 1st line. This removes it
+            if counter:
+                counter = False
+                details = line.split('-')
+                quotes.append(QuoteModel(details[0][1:].strip('\r\n'), details[1].strip('\r\n')))
+            else:
+                details = line.split('-')
+                quotes.append(QuoteModel(details[0].strip('\r\n'), details[1].strip('\r\n')))
 
         return quotes
