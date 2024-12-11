@@ -1,2 +1,2 @@
-from .QuoteEngine import Ingestor
+from .QuoteEngine import Ingestor, QuoteModel
 from .MemeEngine import MemeEngine
