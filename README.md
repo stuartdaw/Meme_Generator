@@ -4,8 +4,7 @@ Create a Meme generator which matches images and quotes either by random or by u
 
 The project uses libraries such as pillow, python-docx, pandas, flask, argparse and os.
 
-![Untitled design](https://github.com/user-attachments/assets/46ebfaa0-7067-4727-9e46-11e4c76b2c6a)
-
+![smaller_memes](https://github.com/user-attachments/assets/d95e1f3d-7ab9-4ab1-bab0-cc23907faed3)
 
 # Instructions to run
 
