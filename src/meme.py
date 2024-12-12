@@ -45,7 +45,7 @@ def generate_meme(path=None, body=None, author=None) -> str:
             raise Exception('Author Required if Body is Used')
         quote = QuoteModel(body, author)
 
-    meme = MemeEngine('_data/created_memes/')
+    meme = MemeEngine('_data/created_memes')
 
     path = meme.make_meme(img, quote.quote, quote.author)
     return path
@@ -61,4 +61,7 @@ if __name__ == "__main__":
                         help='quote author to add to the image')
     args = parser.parse_args()
 
-    print(generate_meme(args.path, args.body, args.author))
+    try:
+        print(generate_meme(args.path, args.body, args.author))
+    except Exception as e:
+        print(e)

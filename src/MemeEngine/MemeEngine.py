@@ -12,18 +12,12 @@ class MemeEngine:
     def make_meme(self, img_path, text, author, width=500, keep=False) -> str:
         """ Method to generate a meme image
 
-        https://wellsr.com/python/centering-text-vertically-and-horizontally-using-pillow/
-        - how to wrap quotes and centre
-
-        https://github.com/python-pillow/Pillow/issues/6938
-        - to help centre image and prevent image going outside of bounds
-
         Arguments:
             img_path {str} -- the file location for the input image.
             text {str} -- the text to be displayed in the meme image.
             author {str} -- the author name to be displayed in the meme image.
             width {int} -- The pixel width value. Default=500.
-            keep {bool} -- whether or not to keep the original image
+            keep {bool} -- whether to keep the original image
         Returns:
             str -- the file path to the output image.
         """
@@ -62,7 +56,7 @@ class MemeEngine:
         x = (img.width - max_width)
         y = (img.height - total_height)
 
-        """ random image offset - check it will stay on image
+        """ create a random image offset - check it will stay on image
         - a cant be more than x
         - b cant be more than y
         """
