@@ -30,17 +30,14 @@ If you enter an author but not a quote it will assign a random quote and author.
 
 To run the application on a browser via flask, use the following code
 
-First: export FLASK_APP=app.py
-
-Then: flask run --host 0.0.0.0 --port 3000 --reload
+python3 app.py
 
 Then the following code runs, and you can click on the browser link after the "Running on" text.
 
- * Serving Flask app 'app.py'
+ * Serving Flask app 'app'
  * Debug mode: off
 WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
- * Running on all addresses (0.0.0.0)
- * Running on http://127.0.0.1:3000
+ * Running on http://127.0.0.1:5000
 
 
 The user interface allows you to generate a random image or add your own image, quote and author via the form.
