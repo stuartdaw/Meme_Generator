@@ -1,16 +1,18 @@
+"""Class to create a meme from an image and a quote."""
 import textwrap
 from PIL import Image, ImageDraw, ImageFont
 import random
 
 
 class MemeEngine:
-    """ Class to create a meme from an image and a quote"""
+    """Class to create a meme from an image and a quote."""
 
     def __init__(self, out_path):
+        """Initialize the meme object."""
         self.out_path = out_path
 
     def make_meme(self, img_path, text, author, width=500, keep=False) -> str:
-        """ Method to generate a meme image
+        """Generate a meme image.
 
         Arguments:
             img_path {str} -- the file location for the input image.
@@ -21,7 +23,6 @@ class MemeEngine:
         Returns:
             str -- the file path to the output image.
         """
-
         img = Image.open(img_path)
 
         if width > 500:

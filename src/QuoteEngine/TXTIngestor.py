@@ -1,17 +1,17 @@
+"""Ingestor to implement IngestorInterface for TXT files."""
 from typing import List
 from .QuoteModel import QuoteModel
 from .IngestorInterface import IngestorInterface
 
 
 class TXTIngestor(IngestorInterface):
-    """ Class to ingest TXT files """
+    """Class to ingest TXT files."""
 
     allowed_doc_types = ['txt']
 
     @classmethod
     def parse(cls, path: str) -> List[QuoteModel]:
-        """Overrides abstract class method for txt files"""
-
+        """Implement abstract class method for txt files."""
         if not cls.can_ingest(path):
             raise f"Can't ingest {path}. Not a valid TXT file."
 

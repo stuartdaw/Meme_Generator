@@ -1,3 +1,4 @@
+"""Ingestor to implement IngestorInterface for PDF files."""
 from typing import List
 import subprocess
 import os
@@ -7,14 +8,13 @@ from .IngestorInterface import IngestorInterface
 
 
 class PDFIngestor(IngestorInterface):
-    """ Class to ingest PDF files """
+    """Class to ingest PDF files."""
 
     allowed_doc_types = ['pdf']
 
     @classmethod
     def parse(cls, path: str) -> List[QuoteModel]:
-        """Overrides abstract class method for pdf files"""
-
+        """Implement abstract class method for pdf files."""
         if not cls.can_ingest(path):
             raise f"Can't ingest {path}. Not a valid PDF file."
 

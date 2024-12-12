@@ -1,3 +1,4 @@
+"""Ingestor to implement IngestorInterface for DOCX files."""
 from typing import List
 import docx
 from .QuoteModel import QuoteModel
@@ -5,14 +6,13 @@ from .IngestorInterface import IngestorInterface
 
 
 class DOCXIngestor(IngestorInterface):
-    """ Class to ingest DOCX files """
+    """Class to ingest DOCX files."""
 
     allowed_doc_types = ['docx']
 
     @classmethod
     def parse(cls, path: str) -> List[QuoteModel]:
-        """Overrides abstract class method for docx files"""
-
+        """Implement abstract class method for docx files."""
         if not cls.can_ingest(path):
             raise f"Can't ingest {path}. Not a valid DOCX file."
 

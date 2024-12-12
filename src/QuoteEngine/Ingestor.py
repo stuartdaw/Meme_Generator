@@ -1,3 +1,4 @@
+"""Ingestor to encapsulate other document ingestors."""
 from .IngestorInterface import IngestorInterface
 from .CSVIngestor import CSVIngestor
 from .DOCXIngestor import DOCXIngestor
@@ -14,7 +15,7 @@ class Ingestor(IngestorInterface):
 
     @classmethod
     def parse(cls, path: str) -> List[QuoteModel]:
-
+        """Parse all document type by using the other ingestors."""
         for ingestor in cls.ingestors:
             if ingestor.can_ingest(path):
                 return ingestor.parse(path)

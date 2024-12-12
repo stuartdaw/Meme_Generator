@@ -1,3 +1,4 @@
+"""Python file to create meme from the CLI."""
 import os
 import random
 import argparse
@@ -6,7 +7,7 @@ from MemeEngine import MemeEngine
 
 
 def generate_meme(path=None, body=None, author=None) -> str:
-    """ Generate a meme given a path and a quote
+    """Generate a meme given a path and a quote.
 
     Arguments:
     path {str} -- the file location for the input image.
@@ -16,7 +17,6 @@ def generate_meme(path=None, body=None, author=None) -> str:
     Returns:
     str -- the file path to the output image.
     """
-
     img = None
     quote = None
 

@@ -1,19 +1,19 @@
+"""Python File to load and run the Meme Generator via Flask."""
+
 import random
 from flask import Flask, render_template, request
 import os
 import requests
+from QuoteEngine import Ingestor, QuoteModel
+from MemeEngine import MemeEngine
 
-
-from .QuoteEngine import Ingestor, QuoteModel
-from .MemeEngine import MemeEngine
 app = Flask(__name__)
 
 meme = MemeEngine('./static')
 
 
 def setup():
-    """ Load all resources """
-
+    """Load all resources."""
     quote_files = ['./_data/DogQuotes/DogQuotesTXT.txt',
                    './_data/DogQuotes/DogQuotesDOCX.docx',
                    './_data/DogQuotes/DogQuotesPDF.pdf',
@@ -49,8 +49,7 @@ quotes, imgs = setup()
 
 @app.route('/')
 def meme_rand():
-    """ Generate a random meme """
-
+    """Generate a random meme."""
     img = random.choice(imgs)
     img = f'_data/photos/dog/{img}'
     quote = random.choice(quotes)
@@ -61,16 +60,15 @@ def meme_rand():
 
 @app.route('/create', methods=['GET'])
 def meme_form():
-    """ User input for meme information """
-
+    """User input for meme information."""
     return render_template('meme_form.html')
 
 
 @app.route('/create', methods=['POST'])
 def meme_post():
-    """ Create a user defined meme """
-
+    """Create a user defined meme."""
     url = request.form.get('image_url')
+    print(url)
     web_quote = request.form.get('body')
     web_author = request.form.get('author')
     tmp = f'./static/{random.randint(0, 1000000000)}.png'
@@ -79,7 +77,10 @@ def meme_post():
     with open(tmp, 'wb') as img:
         img.write(web_image)
 
-    path = meme.make_meme(tmp, web_quote, web_author)
+    try:
+        path = meme.make_meme(tmp, web_quote, web_author)
+    except Exception as e:
+        path = f'./static/nd_valid_url.png'
 
     os.remove(tmp)
 

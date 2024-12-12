@@ -1,3 +1,4 @@
+"""Ingestor to implement IngestorInterface for CSV files."""
 from typing import List
 from .QuoteModel import QuoteModel
 from .IngestorInterface import IngestorInterface
@@ -5,14 +6,13 @@ import pandas as pd
 
 
 class CSVIngestor(IngestorInterface):
-    """ Class to ingest CSV files """
+    """Class to ingest CSV files."""
 
     allowed_doc_types = ['csv']
 
     @classmethod
     def parse(cls, path: str) -> List[QuoteModel]:
-        """Overrides abstract class method for csv files"""
-
+        """Implement abstract class method for csv files."""
         if not cls.can_ingest(path):
             raise f"Can't ingest {path}. Not a valid CSV file."
 
