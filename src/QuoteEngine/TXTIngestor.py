@@ -1,7 +1,6 @@
 from typing import List
 from .QuoteModel import QuoteModel
 from .IngestorInterface import IngestorInterface
-import pandas as pd
 
 
 class TXTIngestor(IngestorInterface):
@@ -27,9 +26,11 @@ class TXTIngestor(IngestorInterface):
             if counter:
                 counter = False
                 details = line.split('-')
-                quotes.append(QuoteModel(details[0][1:].strip('\r\n'), details[1].strip('\r\n')))
+                quotes.append(QuoteModel(details[0][1:].strip('\r\n'),
+                                         details[1].strip('\r\n')))
             else:
                 details = line.split('-')
-                quotes.append(QuoteModel(details[0].strip('\r\n'), details[1].strip('\r\n')))
+                quotes.append(QuoteModel(details[0].strip('\r\n'),
+                                         details[1].strip('\r\n')))
 
         return quotes

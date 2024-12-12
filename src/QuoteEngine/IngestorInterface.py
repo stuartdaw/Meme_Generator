@@ -2,6 +2,7 @@ from abc import ABC, abstractmethod
 from typing import List
 from .QuoteModel import QuoteModel
 
+
 class IngestorInterface(ABC):
     """Abstract class for ingestors. Take different quote docs and parse"""
 
@@ -16,6 +17,7 @@ class IngestorInterface(ABC):
     @classmethod
     @abstractmethod
     def parse(cls, path: str) -> List[QuoteModel]:
-        """Abstract method to parse the doc path. Different doc type classes to override"""
+        """Abstract method to parse the doc path.
+        Different doc type classes to override
+        """
         pass
-

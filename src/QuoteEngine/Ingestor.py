@@ -7,12 +7,10 @@ from .QuoteModel import QuoteModel
 from typing import List
 
 
-
 class Ingestor(IngestorInterface):
     """Class to encapsulate ingestion methods."""
 
     ingestors = [CSVIngestor, TXTIngestor, DOCXIngestor, PDFIngestor,]
-
 
     @classmethod
     def parse(cls, path: str) -> List[QuoteModel]:
@@ -23,9 +21,3 @@ class Ingestor(IngestorInterface):
             # count += 1
             if ingestor.can_ingest(path):
                 return ingestor.parse(path)
-
-
-
-
-
-

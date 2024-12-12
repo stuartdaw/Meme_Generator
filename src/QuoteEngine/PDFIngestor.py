@@ -20,7 +20,7 @@ class PDFIngestor(IngestorInterface):
             raise f"Can't ingest {path}. Not a valid PDF file."
 
         tmp = f'./tmp/{random.randint(0, 100000000)}.txt'
-        call = subprocess.call(['pdftotext','-layout', path, tmp])
+        call = subprocess.call(['pdftotext', '-layout', path, tmp])
 
         file_ref = open(tmp, 'r')
         quotes = []

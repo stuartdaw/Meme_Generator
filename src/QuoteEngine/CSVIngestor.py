@@ -3,6 +3,7 @@ from .QuoteModel import QuoteModel
 from .IngestorInterface import IngestorInterface
 import pandas as pd
 
+
 class CSVIngestor(IngestorInterface):
     """ Class to ingest CSV files """
 
@@ -15,7 +16,6 @@ class CSVIngestor(IngestorInterface):
 
         if not cls.can_ingest(path):
             raise f"Can't ingest {path}. Not a valid CSV file."
-
 
         quotes = []
         df = pd.read_csv(path, header=0)
