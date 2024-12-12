@@ -1,11 +1,10 @@
 import os
 import random
-import sys
 import argparse
 
 # @TODO Import your Ingestor and MemeEngine classes
-from .QuoteEngine import Ingestor, QuoteModel
-from .MemeEngine import MemeEngine
+from QuoteEngine import Ingestor, QuoteModel
+from MemeEngine import MemeEngine
 
 def generate_meme(path=None, body=None, author=None):
     """ Generate a meme given an path and a quote """
@@ -20,7 +19,8 @@ def generate_meme(path=None, body=None, author=None):
 
         img = random.choice(imgs)
     else:
-        img = path[0]
+        img = path
+        # img = path[0]
 
     if body is None:
         quote_files = ['./_data/DogQuotes/DogQuotesTXT.txt',
@@ -37,8 +37,10 @@ def generate_meme(path=None, body=None, author=None):
             raise Exception('Author Required if Body is Used')
         quote = QuoteModel(body, author)
 
-    meme = MemeEngine('./tmp')
-    path = meme.make_meme(img, quote.body, quote.author)
+    # meme = MemeEngine('./tmp')
+    meme = MemeEngine('_data/created_memes/')
+
+    path = meme.make_meme(img, quote.quote, quote.author)
     return path
 
 
@@ -48,9 +50,11 @@ if __name__ == "__main__":
     # body - quote body to add to the image
     # author - quote author to add to the image
     parser = argparse.ArgumentParser(description='Generate a meme')
-    parser.add_argument('path', type=str)
-    parser.add_argument('body', type=str)
-    parser.add_argument('author', type=str)
+    parser.add_argument('--path', type=str)
+    parser.add_argument('--body', type=str)
+    parser.add_argument('--author', type=str)
     args = parser.parse_args()
+
+    print(f"path: {args.path}")
 
     print(generate_meme(args.path, args.body, args.author))

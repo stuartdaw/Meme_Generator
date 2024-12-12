@@ -13,7 +13,6 @@ class Ingestor(IngestorInterface):
 
     ingestors = [CSVIngestor, TXTIngestor, DOCXIngestor, PDFIngestor,]
 
-
     @classmethod
     def parse(cls, path: str) -> List[QuoteModel]:
         # print('got to ingestor.py parse method')
