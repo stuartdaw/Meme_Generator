@@ -2,7 +2,6 @@ from typing import List
 import subprocess
 import os
 import random
-
 from .QuoteModel import QuoteModel
 from .IngestorInterface import IngestorInterface
 

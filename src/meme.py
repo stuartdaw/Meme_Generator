@@ -1,14 +1,22 @@
 import os
 import random
 import argparse
-
-# @TODO Import your Ingestor and MemeEngine classes
 from QuoteEngine import Ingestor, QuoteModel
 from MemeEngine import MemeEngine
 
 
-def generate_meme(path=None, body=None, author=None):
-    """ Generate a meme given an path and a quote """
+def generate_meme(path=None, body=None, author=None) -> str:
+    """ Generate a meme given a path and a quote
+
+    Arguments:
+    path {str} -- the file location for the input image.
+    body {str} -- the text to be displayed in the meme image.
+    author {str} -- the author name to be displayed in the meme image.
+
+    Returns:
+    str -- the file path to the output image.
+    """
+
     img = None
     quote = None
 
@@ -21,7 +29,6 @@ def generate_meme(path=None, body=None, author=None):
         img = random.choice(imgs)
     else:
         img = path
-        # img = path[0]
 
     if body is None:
         quote_files = ['./_data/DogQuotes/DogQuotesTXT.txt',
@@ -38,7 +45,6 @@ def generate_meme(path=None, body=None, author=None):
             raise Exception('Author Required if Body is Used')
         quote = QuoteModel(body, author)
 
-    # meme = MemeEngine('./tmp')
     meme = MemeEngine('_data/created_memes/')
 
     path = meme.make_meme(img, quote.quote, quote.author)
@@ -46,16 +52,13 @@ def generate_meme(path=None, body=None, author=None):
 
 
 if __name__ == "__main__":
-    # @TODO Use ArgumentParser to parse the following CLI arguments
-    # path - path to an image file
-    # body - quote body to add to the image
-    # author - quote author to add to the image
     parser = argparse.ArgumentParser(description='Generate a meme')
-    parser.add_argument('--path', type=str)
-    parser.add_argument('--body', type=str)
-    parser.add_argument('--author', type=str)
+    parser.add_argument('--path', type=str,
+                        help='path to an image file')
+    parser.add_argument('--body', type=str,
+                        help='quote body to add to the image')
+    parser.add_argument('--author', type=str,
+                        help='quote author to add to the image')
     args = parser.parse_args()
-
-    print(f"path: {args.path}")
 
     print(generate_meme(args.path, args.body, args.author))

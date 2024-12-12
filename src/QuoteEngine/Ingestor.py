@@ -14,10 +14,7 @@ class Ingestor(IngestorInterface):
 
     @classmethod
     def parse(cls, path: str) -> List[QuoteModel]:
-        # print('got to ingestor.py parse method')
-        # count = 0
+
         for ingestor in cls.ingestors:
-            # print(count)
-            # count += 1
             if ingestor.can_ingest(path):
                 return ingestor.parse(path)

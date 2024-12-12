@@ -4,8 +4,7 @@ import random
 
 
 class MemeEngine:
-    """ Class to create a meme from an image and a quote
-    """
+    """ Class to create a meme from an image and a quote"""
 
     def __init__(self, out_path):
         self.out_path = out_path
@@ -23,11 +22,12 @@ class MemeEngine:
             img_path {str} -- the file location for the input image.
             text {str} -- the text to be displayed in the meme image.
             author {str} -- the author name to be displayed in the meme image.
-            width {int} -- The pixel width value. Default=None.
+            width {int} -- The pixel width value. Default=500.
+            keep {bool} -- whether or not to keep the original image
         Returns:
             str -- the file path to the output image.
         """
-        print(f'path now: {img_path}')
+
         img = Image.open(img_path)
 
         if width > 500:
@@ -44,7 +44,8 @@ class MemeEngine:
 
         phrase = f'{text} - {author}'
         phrase_wrap = textwrap.wrap(phrase, width=35)
-        print(phrase_wrap)
+
+        # Check quote will fit on image
         if len(phrase_wrap) > (width / font_size):
             raise Exception("Quote is too long")
 
@@ -60,14 +61,13 @@ class MemeEngine:
 
         x = (img.width - max_width)
         y = (img.height - total_height)
-        print(f"x: {x}, y: {y}")
 
-        # random image offset
-        # a cant be more than x
-        # b cant be more than y
+        """ random image offset - check it will stay on image
+        - a cant be more than x
+        - b cant be more than y
+        """
         x = x - random.randint(0, int(x))
         y = y - random.randint(0, int(y))
-        print(f"a: {x}, b: {y}")
 
         # This puts the quote centrally aligned with its separate parts
         line_y = y
@@ -77,12 +77,12 @@ class MemeEngine:
             draw.text((line_x, line_y), phrase_wrap[i], font=font)
             line_y += line_heights[i]
 
+        # To keep my computer clean but can choose to keep
         if keep:
             file = f'{self.out_path}/{random.randint(0, 1000000000)}.png'
         else:
             file = f'{self.out_path}/meme.jpg'
 
         img.save(file)
-        print(f'file or path in make_meme to be returned: {file}')
 
         return file
